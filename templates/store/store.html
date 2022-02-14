@@ -8,8 +8,11 @@
 <!-- ========================= SECTION PAGETOP ========================= -->
 <section class="section-pagetop bg">
     <div class="container">
+        {% if 'search' in request.path %}
+        <h2 class="title-page">Searh Results</h2>
+        {% else %}
         <h2 class="title-page">Our Store</h2>
-        
+        {% endif %}
     </div> <!-- container //  -->
     </section>
     <!-- ========================= SECTION INTRO END// ========================= -->
@@ -129,31 +132,35 @@
     </header><!-- sect-heading -->
     
     <div class="row">
-        {% for product in products %}
-        <div class="col-md-4">
-            <figure class="card card-product-grid">
-                <div class="img-wrap"> 
-                    
-			<a href="{{product.get_url}}" class="img-wrap"> <img src="{{product.images.url}}"> </a>
-                    
-                </div> <!-- img-wrap.// -->
-                <figcaption class="info-wrap">
-                    <div class="fix-height">
-                        <a href="{{product.get_url}}" class="title">{{product.product_name}}</a>
-                        <div class="price-wrap mt-2">
-                            <span class="price">${{product.price}}</span>
-                        </div> <!-- price-wrap.// -->
-                    </div>
-                    {% if product.stock <= 0 %}
-                        <a href="{{product.get_url}}" class="btn  btn-outline-primary"> <span class="text">View Details</span> <i class="fas fa-eye"></i>  </a>
-                    {% else %}
-                        <a href="{% url 'add_cart' product.id %}" class="btn  btn-primary"> <span class="text">Add to Cart</span> <i class="fas fa-shopping-cart"></i>  </a>
-                    {% endif %}
-                    {% comment %} <a href="#" class="btn btn-block btn-primary">Add to cart </a> {% endcomment %}
-                </figcaption>
-            </figure>
-        </div> <!-- col.// -->
-        {% endfor %}
+        {% if products %}
+            {% for product in products %}
+            <div class="col-md-4">
+                <figure class="card card-product-grid">
+                    <div class="img-wrap"> 
+                        
+                <a href="{{product.get_url}}" class="img-wrap"> <img src="{{product.images.url}}"> </a>
+                        
+                    </div> <!-- img-wrap.// -->
+                    <figcaption class="info-wrap">
+                        <div class="fix-height">
+                            <a href="{{product.get_url}}" class="title">{{product.product_name}}</a>
+                            <div class="price-wrap mt-2">
+                                <span class="price">${{product.price}}</span>
+                            </div> <!-- price-wrap.// -->
+                        </div>
+                        {% if product.stock <= 0 %}
+                            <a href="{{product.get_url}}" class="btn  btn-outline-primary"> <span class="text">View Details</span> <i class="fas fa-eye"></i>  </a>
+                        {% else %}
+                            <a href="{% url 'add_cart' product.id %}" class="btn  btn-primary"> <span class="text">Add to Cart</span> <i class="fas fa-shopping-cart"></i>  </a>
+                        {% endif %}
+                        {% comment %} <a href="#" class="btn btn-block btn-primary">Add to cart </a> {% endcomment %}
+                    </figcaption>
+                </figure>
+            </div> <!-- col.// -->
+            {% endfor %}
+        {% else %}
+            <div> Nothing Found. Sorry :(</div>
+        {% endif %}
     </div> <!-- row end.// -->
     
     
