@@ -7,9 +7,9 @@
     <!-- ============================ COMPONENT 1 ================================= -->
     
     {% if not cart_items %}
-        <h2>Your Shopping Cart is Empty</h2>
+        <h2 class="text-center">Your Shopping Cart is Empty</h2>
         <br>
-        <div class="text-left">
+        <div class="text-center">
             <a href="{% url 'store' %}" class="btn btn-primary">Continue Shopping</a>
         </div>
     {% else %}
