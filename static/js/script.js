@@ -57,4 +57,4 @@ $(document).ready(function() {
     
 }); 
 // jquery end
-
+$('#alert_message').delay(2000).fadeOut();
